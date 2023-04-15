@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MoYeRanCTMD-me</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.2/css/foundation.min.css">
+    <style>
+      /* 设置样式 */
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        height: 100vh;
+      }
+      #editor {
+        flex: 1;
+        height: 100%;
+        border: none;
+        outline: none;
+        padding: 20px;
+        font-size: 16px;
+      }
+      #preview {
+        flex: 1;
+        height: 100%;
+        border: none;
+        outline: none;
+        padding: 20px;
+        font-size: 16px;
+        overflow-y: scroll;
+        background-color: #f6f8fa;
+      }
+      /* md样式 */
+      pre {
+        white-space: pre-wrap;       /* css-3 */
+        white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+        white-space: -pre-wrap;      /* Opera 4-6 */
+        white-space: -o-pre-wrap;    /* Opera 7 */
+        word-wrap: break-word;       /* Internet Explorer 5.5+ */
+        background-color: #f8f8f8;
+        border: 1px solid #dfdfdf;
+        margin-top: 1.5em;
+        margin-bottom: 1.5em;
+        padding: 0.125rem 0.3125rem 0.0625rem;
+     }
+
+      pre code {
+       background-color: transparent;
+       border: 0;
+       padding: 0;
+     }
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/showdown/dist/showdown.min.js"></script>
+  </head>
+  <body>
+    <!-- 左侧文本编辑器 -->
+    <textarea id="editor" placeholder="在这里输入Markdown文本"></textarea>
+
+    <!-- 右侧实时预览 -->
+    <div id="preview"></div>
+
+    <!-- 加载showdown.js库 -->
+    <script>
+      // 获取DOM元素
+      const editor = document.getElementById("editor");
+      const preview = document.getElementById("preview");
+
+      // 初始化showdown实例
+      const converter = new showdown.Converter();
+      // 获取编辑器文本
+      const markdown = editor.value;
+        // 将markdown转换为HTML
+        const html = converter.makeHtml(markdown);
+        // 在预览窗口中显示HTML
+        preview.innerHTML = html;
+
+      // 监听输入事件
+      editor.addEventListener("input", () => {
+        // 获取编辑器文本
+        const markdown = editor.value;
+
+        // 将markdown转换为HTML
+        const html = converter.makeHtml(markdown);
+
+        // 在预览窗口中显示HTML
+        preview.innerHTML = html;
+      });
+    </script>
+  </body>
+</html>
